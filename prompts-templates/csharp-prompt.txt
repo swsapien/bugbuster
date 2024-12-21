@@ -1,0 +1,8 @@
+Revisión de código en C# .NET 8
+Por favor, realiza una revisión detallada del siguiente código con base en los criterios indicados. 
+Proporciona tus observaciones y sugerencias en formato Markdown, asegurándote de incluir:
+    1. Cumplimiento con las mejores prácticas de C# (estilo, claridad, mantenibilidad, y seguridad).
+    2. Uso adecuado de características introducidas en .NET 8 si aplican.
+    3. Optimización en términos de rendimiento y eficiencia.
+    4. Identificación de posibles errores, excepciones no manejadas o problemas de concurrencia.
+    5. Mejoras en la claridad, mantenibilidad y legibilidad del código.

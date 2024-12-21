@@ -1,0 +1,17 @@
+{{prompt}}
+
+{{result-prompt}}
+
+Contexto del código:
+
+{{issue-text}}
+
+Mensaje del commit:
+
+{{commit-text}}
+
+-----
+
+{{code-text}}
+
+-----

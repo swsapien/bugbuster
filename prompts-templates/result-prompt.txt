@@ -1,0 +1,70 @@
+En la respuesta de la revision menciona el nombre del archivo y lista las recomendaciones en el orden de los criterios.
+Para cada recomendación (si aplica) incluye una descripción del problema, su impacto potencial y una propuesta de solución y si tienes recomendaciones adicionales mencionalas aparte.
+
+Las recomendaciones que sean codigo fuente, ponlas como bloque de codigo.
+
+Ejemplo:
+
+## Revisión de Código - [NOMBRE_ARCHIVO]
+
+### 1. [NOMBRE_DEL_CRITERIO] [si cumplio criterio :white_check_mark: y si no cumplio :x: ]
+
+:warning: **Problema Identificado:** [DESCRIPCIÓN BREVE DEL PROBLEMA].
+
+:triangular_flag_on_post: **Impacto Potencial:** [DESCRIPCIÓN DEL IMPACTO].
+
+:pencil2: **Propuesta de Solución:** [PROPUESTA DE SOLUCIÓN].
+
+:white_check_mark: **Estado Actual:** [DESCRIPCIÓN DE LO QUE SE HIZO BIEN SEGÚN ESTE CRITERIO].
+
+```[LENGUAJE]
+    [CÓDIGO ACTUALIZADO SI APLICA]
+```
+
+
+### 2. [NOMBRE_DEL_CRITERIO] [si cumplio criterio :white_check_mark: y si no cumplio :x: ]
+
+:warning: **Problema Identificado:** [DESCRIPCIÓN BREVE DEL PROBLEMA].
+
+:triangular_flag_on_post: **Impacto Potencial:** [DESCRIPCIÓN DEL IMPACTO].
+
+:pencil2: **Propuesta de Solución:** [PROPUESTA DE SOLUCIÓN].
+
+:white_check_mark: **Estado Actual:** [DESCRIPCIÓN DE LO QUE SE HIZO BIEN SEGÚN ESTE CRITERIO].
+
+```[LENGUAJE]
+    [CÓDIGO ACTUALIZADO SI APLICA]
+```
+
+
+### 3. [NOMBRE_DEL_CRITERIO] [si cumplio criterio :white_check_mark: y si no cumplio :x: ]
+
+:warning: **Problema Identificado:** [DESCRIPCIÓN BREVE DEL PROBLEMA].
+
+:triangular_flag_on_post: **Impacto Potencial:** [DESCRIPCIÓN DEL IMPACTO].
+
+:pencil2: **Propuesta de Solución:** [PROPUESTA DE SOLUCIÓN].
+
+:white_check_mark: **Estado Actual:** [DESCRIPCIÓN DE LO QUE SE HIZO BIEN SEGÚN ESTE CRITERIO].
+
+```[LENGUAJE]
+    [CÓDIGO ACTUALIZADO SI APLICA]
+```
+
+---
+
+#### :bulb: Recomendaciones Adicionales [si aplica]
+- **[SUGERENCIA 1]:** [DESCRIPCIÓN].
+- **[SUGERENCIA 2]:** [DESCRIPCIÓN].
+
+```[LENGUAJE]
+[CÓDIGO EJEMPLO SI APLICA]
+```
+
+
+:pushpin: **Resumen:** 
+[RESUMEN DEL ANÁLISIS, DESTACANDO LOS PROBLEMAS PRINCIPALES Y MEJORAS PROPUESTAS].
+
+---
+
+---
