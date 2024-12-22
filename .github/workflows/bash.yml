@@ -9,9 +9,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name : Fetch all the branches
         run: git fetch --all
 
       - name: Run Bash script
-        run: bash diff.sh develop origin/master
+        run: bash diff.sh develop master
