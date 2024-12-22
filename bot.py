@@ -6,16 +6,18 @@ from collections import defaultdict
 from requests.auth import HTTPBasicAuth
 import openai
 from openai import ChatCompletion
-import attlassian
+import atlassian
 from dotenv import load_dotenv
 load_dotenv()
 
-# Variables de entorno
 BITBUCKET_PR_ID = os.getenv("BITBUCKET_PR_ID")
 BITBUCKET_BRANCH = os.getenv("BITBUCKET_BRANCH")
 BITBUCKET_PR_DESTINATION_BRANCH = os.getenv("BITBUCKET_PR_DESTINATION_BRANCH")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+ATLASSIAN_API_TOKEN = os.getenv("ATLASSIAN_API_TOKEN")
+
 openai.api_key = OPENAI_API_KEY
+atlassian.config.configure_jira(api_token=ATLASSIAN_API_TOKEN)
 
 
 def analyze_code_with_openai(content):
@@ -90,13 +92,13 @@ def main(file_extentions_included_args):
     print("\n\n")
 
     # pull request information
-    pull_request_content = attlassian.get_content_on_pr_from_bitbucket(BITBUCKET_PR_ID)
+    pull_request_content = atlassian.get_content_on_pr_from_bitbucket(BITBUCKET_PR_ID)
     pr_commit_title = pull_request_content["title"]
     pr_commit_message = pull_request_content["description"]
 
     # jira issue information
     issue_id = get_issue_id_from_branch(BITBUCKET_BRANCH)
-    issue_title, issue_text = attlassian.get_issue_from_jira(issue_id)
+    issue_title, issue_text = atlassian.get_issue_from_jira(issue_id)
 
     # get changes by file
     files_changes = get_changed_files_from_diffbash(
@@ -125,7 +127,7 @@ def main(file_extentions_included_args):
         print(prompt_for_file)
         analysis_results = analyze_code_with_openai(prompt_for_file) + "\n\n"
         if analysis_results != "":
-            response = attlassian.comment_on_pr_from_bitbucket(BITBUCKET_PR_ID, file, analysis_results)
+            response = atlassian.comment_on_pr_from_bitbucket(BITBUCKET_PR_ID, file, analysis_results)
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
