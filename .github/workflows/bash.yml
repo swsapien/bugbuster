@@ -11,4 +11,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Bash script
-        run: bash diff.sh develop master
+        run: bash diff.sh develop origin/master
