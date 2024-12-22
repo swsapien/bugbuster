@@ -14,4 +14,4 @@ jobs:
         run: git fetch --all
 
       - name: Run Bash script
-        run: bash diff.sh feature/001 develop
+        run: bash diff.sh feature/001 origin/develop
