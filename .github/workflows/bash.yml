@@ -17,11 +17,6 @@ jobs:
       - name: Debug branches
         run: git branch -a
 
-      - name: Display Branch Name (Full Reference)
-        run: echo "Current Branch (Full Ref): ${{ github.ref }}"
-
-      - name: Display Branch Name (Short Name)
-        run: echo "Current Branch: ${{ github.ref_name }}"
 
       - name: Run Bash script
         run: bash diff.sh feature/001 origin/develop
