@@ -3,21 +3,17 @@ import requests
 class GithubConfig:
     def __init__(self):
         self.github_token = None
-        self.github_repo_owner = None
-        self.github_repo_name = None
+        self.github_repo = None
 
-    def configure_github(self, token, repo_owner, repo_name):
+    def configure_github(self, token, repo):
         self.github_token = token
-        self.github_repo_owner = repo_owner
-        self.github_repo_name = repo_name
+        self.github = repo
 
     def validate_github_config(self):
         if not self.github_token:
             raise ValueError("El token de GitHub no está configurado.")
-        if not self.github_repo_owner:
-            raise ValueError("El propietario del repositorio no está configurado.")
-        if not self.github_repo_name:
-            raise ValueError("El nombre del repositorio no está configurado.")
+        if not self.github_repo:
+            raise ValueError("El repositorio no está configurado.")
 
 
 # Singleton instance for global configuration
@@ -34,7 +30,7 @@ def comment_on_pr(pr_id, comment_body, cfg=config):
     """
     cfg.validate_github_config()
     
-    url = f"https://api.github.com/repos/{cfg.github_repo_owner}/{cfg.github_repo_name}/issues/{pr_id}/comments"
+    url = f"https://api.github.com/repos/{cfg.github_repo}/issues/{pr_id}/comments"
     payload = {"body": comment_body}
     headers = {
         "Authorization": f"Bearer {cfg.github_token}",
@@ -55,7 +51,7 @@ def get_pr_details(pr_id, cfg=config):
     """
     cfg.validate_github_config()
     
-    url = f"https://api.github.com/repos/{cfg.github_repo_owner}/{cfg.github_repo_name}/pulls/{pr_id}"
+    url = f"https://api.github.com/repos/{cfg.github_repo}/pulls/{pr_id}"
     headers = {
         "Authorization": f"Bearer {cfg.github_token}",
         "Accept": "application/vnd.github.v3+json"
@@ -79,7 +75,7 @@ def get_file_content_from_pr(pr_id, file_path, cfg=config):
     pr_details = get_pr_details(pr_id, cfg)
     head_sha = pr_details["head"]["sha"]
     
-    url = f"https://api.github.com/repos/{cfg.github_repo_owner}/{cfg.github_repo_name}/contents/{file_path}"
+    url = f"https://api.github.com/repos/{cfg.github_repo}/contents/{file_path}"
     headers = {
         "Authorization": f"Bearer {cfg.github_token}",
         "Accept": "application/vnd.github.v3+json"
@@ -91,8 +87,7 @@ def get_file_content_from_pr(pr_id, file_path, cfg=config):
     return response.json()
 
 
-# Ejemplo de uso
-
+'''
 if __name__ == "__main__":
     config.configure_github(
         token="your_github_token",
@@ -115,3 +110,4 @@ if __name__ == "__main__":
 
     except Exception as e:
         print("Error:", e)
+'''

@@ -16,6 +16,8 @@ jobs:
       - name: Use Bugster Bot action
         uses: ./.github/actions/bugster
         with:
+          GITHUB_PR_ID: ${{ github.event.pull_request.number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           BRANCH: ${{ github.event.pull_request.head.ref }}
           DESTINATION_BRANCH: ${{ github.event.pull_request.base.ref }}
           EXTENTIONS_TO_CHECK: cs
