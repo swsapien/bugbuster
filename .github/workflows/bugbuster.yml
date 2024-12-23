@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      
+      - name: Fetch all the branches
+        run: git fetch --all
 
       - name: Use Bugster Bot action
         uses: ./.github/actions/bugster
