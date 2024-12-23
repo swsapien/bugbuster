@@ -58,10 +58,7 @@ def get_file_content(file_path):
     
 def get_issue_id_from_branch(branch_name):
     parts = branch_name.split("/")
-    if len(parts) > 1:
-        return parts[1]
-    else:
-        return ""
+    return parts[-1] if parts else ""
 
 
 def get_file_extension(file_path):
