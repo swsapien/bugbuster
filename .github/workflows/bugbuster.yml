@@ -2,8 +2,6 @@ name: Run Bugster Bot
 
 on:
   pull_request:
-    branches:
-      - main
 
 jobs:
   run-bugster-bot:
