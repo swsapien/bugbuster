@@ -20,3 +20,6 @@ jobs:
 
       - name: Run Bash script
         run: bash diff.sh feature/001 origin/develop
+
+      - name: Print Github Contenxt json
+        run: echo "${{ toJson(github) }}"
