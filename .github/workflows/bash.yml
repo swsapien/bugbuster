@@ -13,5 +13,14 @@ jobs:
       - name : Fetch all the branches
         run: git fetch --all
 
+      - name: Debug branches
+        run: git branch -a
+
+      - name: Display Branch Name
+        run: echo "Current Branch: ${{ github.ref }}"
+
+      - name: Display Branch Name
+        run: echo "Current Branch: ${{ github.ref_name }}"
+
       - name: Run Bash script
         run: bash diff.sh feature/001 origin/develop
