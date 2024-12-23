@@ -11,8 +11,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BITBUCKET_PR_ID = os.getenv("BITBUCKET_PR_ID")
-BITBUCKET_BRANCH = os.getenv("BITBUCKET_BRANCH")
-BITBUCKET_PR_DESTINATION_BRANCH = os.getenv("BITBUCKET_PR_DESTINATION_BRANCH")
+BRANCH = os.getenv("BRANCH")
+DESTINATION_BRANCH = os.getenv("DESTINATION_BRANCH")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ATLASSIAN_API_TOKEN = os.getenv("ATLASSIAN_API_TOKEN")
 
@@ -87,22 +87,26 @@ def main(file_extentions_included_args):
 
     print("envars:")
     print(BITBUCKET_PR_ID)
-    print(BITBUCKET_PR_DESTINATION_BRANCH)
-    print(BITBUCKET_BRANCH)
+    print(DESTINATION_BRANCH)
+    print(BRANCH)
     print("\n\n")
 
     # pull request information
-    pull_request_content = atlassian.get_content_on_pr_from_bitbucket(BITBUCKET_PR_ID)
-    pr_commit_title = pull_request_content["title"]
-    pr_commit_message = pull_request_content["description"]
+    if BITBUCKET_PR_ID:
+        pull_request_content = atlassian.get_content_on_pr_from_bitbucket(BITBUCKET_PR_ID)
+        pr_commit_title = pull_request_content["title"]
+        pr_commit_message = pull_request_content["description"]
+    else:
+        pr_commit_title = ""
+        pr_commit_message = ""
 
     # jira issue information
-    issue_id = get_issue_id_from_branch(BITBUCKET_BRANCH)
+    issue_id = get_issue_id_from_branch(BRANCH)
     issue_title, issue_text = atlassian.get_issue_from_jira(issue_id)
 
     # get changes by file
     files_changes = get_changed_files_from_diffbash(
-        "diff.sh", [f"{BITBUCKET_PR_DESTINATION_BRANCH}", f"{BITBUCKET_BRANCH}", f"{file_extentions_included_args}"]
+        "diff.sh", [f"{DESTINATION_BRANCH}", f"{BRANCH}", f"{file_extentions_included_args}"]
     )
 
     for file, diffs in files_changes.items():

@@ -1,6 +1,15 @@
 name: 'Bugster Bot'
 description: 'Bugster Bot, a paranormal investigation and removal service for bugs and bad practices'
 inputs:
+  BRANCH:
+    description: 'Branch'
+    required: true
+  DESTINATION_BRANCH:
+    description: 'Destination Branch'
+    required: true
+  EXTENTIONS_TO_CHECK:
+    description: 'Extentions to check separated whit commas ej: py,js,cs'
+    required: true
   ATLASSIAN_API_TOKEN:
     description: 'Atlassian API Token'
     required: true
@@ -25,8 +34,8 @@ runs:
 
     - name: Run bot.py
       env:
-        BITBUCKET_PR_ID: ${{ inputs.BITBUCKET_PR_ID }}
-        BITBUCKET_BRANCH: ${{ inputs.BITBUCKET_BRANCH }}
-        BITBUCKET_PR_DESTINATION_BRANCH: ${{ inputs.BITBUCKET_PR_DESTINATION_BRANCH }}
+        BRANCH: ${{ inputs.BRANCH }}
+        DESTINATION_BRANCH: ${{ inputs.DESTINATION_BRANCH }}
         OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY }}
-      run: python bot.py
+        ATLASSIAN_API_TOKEN: ${{ inputs.ATLASSIAN_API_TOKEN }}
+      run: python bot.py ${{ inputs.EXTENTIONS_TO_CHECK }}
