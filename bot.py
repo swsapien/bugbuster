@@ -22,7 +22,7 @@ GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY")
 
 openai.api_key = OPENAI_API_KEY
 atlassian.config.configure_jira(api_token=ATLASSIAN_API_TOKEN)
-github.configure_github(
+github.config.configure_github(
     token=PTA_GITHUB_TOKEN,
     repo= GITHUB_REPOSITORY
 )
