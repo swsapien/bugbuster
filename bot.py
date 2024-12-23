@@ -8,8 +8,8 @@ import openai
 from openai import ChatCompletion
 import atlassian
 import github
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 BITBUCKET_PR_ID = os.getenv("BITBUCKET_PR_ID")
 GITHUB_PR_ID = os.getenv("GITHUB_PR_ID")
@@ -17,13 +17,13 @@ BRANCH = os.getenv("BRANCH")
 DESTINATION_BRANCH = os.getenv("DESTINATION_BRANCH")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ATLASSIAN_API_TOKEN = os.getenv("ATLASSIAN_API_TOKEN")
-GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
+PTA_GITHUB_TOKEN = os.getenv("PTA_GITHUB_TOKEN")
 GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY")
 
 openai.api_key = OPENAI_API_KEY
 atlassian.config.configure_jira(api_token=ATLASSIAN_API_TOKEN)
 github.configure_github(
-    token=GITHUB_TOKEN,
+    token=PTA_GITHUB_TOKEN,
     repo= GITHUB_REPOSITORY
 )
 
