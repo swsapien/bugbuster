@@ -7,7 +7,7 @@ if [ "$#" -lt 2 ]; then
 fi
 
 # Ramas a comparar
-BRANCH1="origin/$1"
+BRANCH1="$1"
 BRANCH2="$2"
 
 # Extensiones opcionales

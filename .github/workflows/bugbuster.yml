@@ -1,0 +1,18 @@
+name: Run Bugster Bot
+
+on:
+  pull_request:
+
+jobs:
+  run-bugster-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Bugster Bot action
+        uses: ./.github/actions/bugster
+        with:
+          EXTENTIONS_TO_CHECK: cs
+          ATLASSIAN_API_TOKEN: ${{ secrets.ATLASSIAN_API_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
