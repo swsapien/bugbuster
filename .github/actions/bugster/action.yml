@@ -40,4 +40,4 @@ runs:
         DESTINATION_BRANCH: ${{ inputs.DESTINATION_BRANCH }}
         OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY }}
         ATLASSIAN_API_TOKEN: ${{ inputs.ATLASSIAN_API_TOKEN }}
-      run: python bot.py ${{ inputs.EXTENTIONS_TO_CHECK }}
+      run: python bot.py cs
