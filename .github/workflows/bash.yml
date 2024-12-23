@@ -1,7 +1,7 @@
 name: Bash Script
 
 on:
-  workflow_dispatch:
+  pull_request:
 
 jobs:
   bash-script:
@@ -19,7 +19,7 @@ jobs:
 
 
       - name: Run Bash script
-        run: bash diff.sh feature/001 origin/develop
+        run: bash diff.sh ${{ github.ref }} ${{ github.base_ref }}
 
       - name: Print Github Contenxt json
         run: echo "${{ toJson(github) }}"
