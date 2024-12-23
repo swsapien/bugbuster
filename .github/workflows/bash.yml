@@ -1,4 +1,5 @@
 name: Bash Script
+
 on:
   workflow_dispatch:
 
@@ -10,8 +11,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name : Fetch all the branches
+      - name: Fetch all the branches
         run: git fetch --all
+  
+      - name: Debug branches
+        run: git branch -a
+
+      - name: Display Branch Name (Full Reference)
+        run: echo "Current Branch (Full Ref): ${{ github.ref }}"
+
+      - name: Display Branch Name (Short Name)
+        run: echo "Current Branch: ${{ github.ref_name }}"
 
       - name: Run Bash script
-        run: bash diff.sh develop master
+        run: bash diff.sh feature/001 origin/develop
