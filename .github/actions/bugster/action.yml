@@ -36,8 +36,9 @@ runs:
     - name: Run bot.py
       shell: bash
       env:
-        BRANCH: ${{ inputs.BRANCH }}
-        DESTINATION_BRANCH: ${{ inputs.DESTINATION_BRANCH }}
+        BRANCH: origin/${{ inputs.BRANCH }}
+        DESTINATION_BRANCH: origin/${{ inputs.DESTINATION_BRANCH }}
+        GITHUB_REPOSITORY: ${{ inputs.repository }}
         OPENAI_API_KEY: ${{ inputs.OPENAI_API_KEY }}
         ATLASSIAN_API_TOKEN: ${{ inputs.ATLASSIAN_API_TOKEN }}
       run: python bot.py cs

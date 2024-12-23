@@ -7,18 +7,25 @@ from requests.auth import HTTPBasicAuth
 import openai
 from openai import ChatCompletion
 import atlassian
-from dotenv import load_dotenv
-load_dotenv()
+import github
+#from dotenv import load_dotenv
+#load_dotenv()
 
 BITBUCKET_PR_ID = os.getenv("BITBUCKET_PR_ID")
+GITHUB_PR_ID = os.getenv("GITHUB_PR_ID")
 BRANCH = os.getenv("BRANCH")
 DESTINATION_BRANCH = os.getenv("DESTINATION_BRANCH")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 ATLASSIAN_API_TOKEN = os.getenv("ATLASSIAN_API_TOKEN")
+PTA_GITHUB_TOKEN = os.getenv("PTA_GITHUB_TOKEN")
+GITHUB_REPOSITORY = os.getenv("GITHUB_REPOSITORY")
 
 openai.api_key = OPENAI_API_KEY
 atlassian.config.configure_jira(api_token=ATLASSIAN_API_TOKEN)
-
+github.config.configure_github(
+    token=PTA_GITHUB_TOKEN,
+    repo= GITHUB_REPOSITORY
+)
 
 def analyze_code_with_openai(content):
     response = ChatCompletion.create(
@@ -58,10 +65,7 @@ def get_file_content(file_path):
     
 def get_issue_id_from_branch(branch_name):
     parts = branch_name.split("/")
-    if len(parts) > 1:
-        return parts[1]
-    else:
-        return ""
+    return parts[-1] if parts else ""
 
 
 def get_file_extension(file_path):
@@ -87,6 +91,7 @@ def main(file_extentions_included_args):
 
     print("envars:")
     print(BITBUCKET_PR_ID)
+    print(GITHUB_PR_ID)
     print(DESTINATION_BRANCH)
     print(BRANCH)
     print("\n\n")
@@ -96,7 +101,7 @@ def main(file_extentions_included_args):
         pull_request_content = atlassian.get_content_on_pr_from_bitbucket(BITBUCKET_PR_ID)
         pr_commit_title = pull_request_content["title"]
         pr_commit_message = pull_request_content["description"]
-    else:
+    elif GITHUB_PR_ID:
         pr_commit_title = ""
         pr_commit_message = ""
 
@@ -130,8 +135,11 @@ def main(file_extentions_included_args):
 
         print(prompt_for_file)
         analysis_results = analyze_code_with_openai(prompt_for_file) + "\n\n"
-        if analysis_results != "":
+        if analysis_results != "" and BITBUCKET_PR_ID:
             response = atlassian.comment_on_pr_from_bitbucket(BITBUCKET_PR_ID, file, analysis_results)
+        elif analysis_results != "" and GITHUB_PR_ID:
+            print(analysis_results)
+            #response = github.comment_on_pr(GITHUB_PR_ID, analysis_results)
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

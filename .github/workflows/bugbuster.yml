@@ -9,10 +9,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      
+      - name: Fetch all the branches
+        run: git fetch --all
 
       - name: Use Bugster Bot action
         uses: ./.github/actions/bugster
         with:
+          GITHUB_PR_ID: ${{ github.event.pull_request.number }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
+          DESTINATION_BRANCH: ${{ github.event.pull_request.base.ref }}
           EXTENTIONS_TO_CHECK: cs
           ATLASSIAN_API_TOKEN: ${{ secrets.ATLASSIAN_API_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
