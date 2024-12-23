@@ -19,7 +19,7 @@ jobs:
 
 
       - name: Run Bash script
-        run: bash diff.sh ${{ github.ref }} ${{ github.base_ref }}
+        run: bash diff.sh ${{ github.head_ref }} ${{ github.base_ref }}
 
       - name: Print Github Contenxt json
         run: echo "${{ toJson(github) }}"
