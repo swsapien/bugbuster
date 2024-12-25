@@ -95,8 +95,6 @@ def main(file_extentions_included_args):
     print("envars:")
     print(BITBUCKET_PR_ID)
     print(GITHUB_PR_ID)
-    print(DESTINATION_BRANCH)
-    print(BRANCH)
     print("\n\n")
 
     # pull request information
@@ -110,7 +108,12 @@ def main(file_extentions_included_args):
     elif GITHUB_PR_ID:
         pr_commit_title = ""
         pr_commit_message = ""
-
+        
+    print("envars:")
+    print(DESTINATION_BRANCH)
+    print(BRANCH)
+    print("\n\n")
+    
     # jira issue information
     issue_id = get_issue_id_from_branch(BRANCH)
     issue_title, issue_text = atlassian.get_issue_from_jira(issue_id)
