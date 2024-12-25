@@ -101,6 +101,9 @@ def main(file_extentions_included_args):
 
     # pull request information
     if BITBUCKET_PR_ID:
+        BRANCH = os.getenv("BITBUCKET_BRANCH")
+        DESTINATION_BRANCH = os.getenv("BITBUCKET_PR_DESTINATION_BRANCH")
+        
         pull_request_content = atlassian.get_content_on_pr_from_bitbucket(BITBUCKET_PR_ID)
         pr_commit_title = pull_request_content["title"]
         pr_commit_message = pull_request_content["description"]
