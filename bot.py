@@ -1,9 +1,7 @@
 import os
 import sys
-import time
 import subprocess
 from collections import defaultdict
-from requests.auth import HTTPBasicAuth
 import openai
 from openai import ChatCompletion
 import atlassian
@@ -30,7 +28,7 @@ github.config.configure_github(
 def analyze_code_with_openai(content):
     response = ChatCompletion.create(
         model="gpt-4o-mini",
-        max_tokens=1024,
+        max_tokens=2048,
         messages=[{"role": "system", "content": "Tu eres un revisor de código"}, {"role": "user", "content": f"{content}"}],
     )
     return response.choices[0].message["content"]
@@ -38,8 +36,9 @@ def analyze_code_with_openai(content):
 
 def get_changed_files_from_diffbash(script_path, script_args):
     try:
-        script_path = os.path.abspath(script_path)
-        result = subprocess.run(["bash", script_path] + script_args, capture_output=True, text=True, check=True)
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        absolute_script_path = os.path.join(base_dir, script_path)
+        result = subprocess.run(["bash", absolute_script_path] + script_args, capture_output=True, text=True, check=True)
         output_lines = result.stdout.strip().splitlines()
 
         # Separar las diferencias por archivo
@@ -59,7 +58,9 @@ def get_changed_files_from_diffbash(script_path, script_args):
         return {}
 
 def get_file_content(file_path):
-    with open(file_path, "r") as file:
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    absolute_file_path = os.path.join(base_dir, file_path)
+    with open(absolute_file_path, "r") as file:
         return file.read()
     
     
@@ -77,6 +78,8 @@ def get_prompt_template_by_file_extention(ext):
     match ext:
         case ".cs":
             return "csharp-prompt"
+        case ".py":
+            return "python-prompt"
         case ".php" | ".go":
             print(f"prompt for file -{ext}- not implemented ")
             sys.exit(1)

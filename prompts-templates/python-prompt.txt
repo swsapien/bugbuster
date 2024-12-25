@@ -1,0 +1,7 @@
+Revisión de código en Python
+Por favor, realiza una revisión detallada del siguiente código en Python con base en los criterios indicados.
+Proporciona tus observaciones y sugerencias en formato Markdown, asegurándote de incluir:
+    1. Cumplimiento con las mejores prácticas de Python: estilo (PEP 8), claridad, mantenibilidad, y seguridad.
+    2. Optimización en términos de rendimiento y eficiencia: analiza posibles mejoras en algoritmos, estructuras de datos y uso eficiente de recursos.
+    3. Identificación de posibles errores, excepciones no manejadas o problemas de concurrencia: revisa posibles errores de lógica, excepciones no contempladas o problemas en entornos multihilo.
+    4. Compatibilidad y portabilidad: evalúa si el código es portable y compatible con diferentes entornos o versiones de Python.
